@@ -88,6 +88,21 @@ module.exports = FormatterClangformat =
           type: 'array'
           default: []
           description: 'Example : `-assume-filename="/usr/local/mycfg/js/.clang-format"`'
+    protobuf:
+      title: 'Protobuf language'
+      type: 'object'
+      description: 'All parameters for Protobuf language.'
+      properties:
+        enable:
+          title: 'Enable formatter for Protobuf language'
+          type: 'boolean'
+          default: true
+          description: 'Need restart Atom.'
+        arguments:
+          title: 'Arguments passed to the formatter Protobuf language'
+          type: 'array'
+          default: []
+          description: 'Example : `-assume-filename="/usr/local/mycfg/protobuf/.clang-format"`'
 
   provideFormatter: ->
     [
@@ -99,15 +114,17 @@ module.exports = FormatterClangformat =
             command = atom.config.get 'formatter-clangformat.a.executablePath'
             args = atom.config.get 'formatter-clangformat.c.argumentsC'
             toReturn = []
+            toReturnErr = []
             process = child_process.spawn(command, args, {})
+            process.stderr.on 'data', (data) -> toReturnErr.push data
             process.stdout.on 'data', (data) -> toReturn.push data
             process.stdin.write text
             process.stdin.end()
             process.on 'close', ->
-            if toReturn.length isnt 0
-              resolve(toReturn.join('\n'))
-            else
-              atom.notifications.addWarning("An error is occured");
+              if toReturn.length isnt 0
+                resolve(toReturn.join('\n'))
+              else
+                atom.notifications.addError('formatter-clangformat : error', {dismissable: true, detail: toReturnErr.join('\n')});
       } if atom.config.get 'formatter-clangformat.c.enable'
       {
         selector: '.source.cpp'
@@ -117,15 +134,17 @@ module.exports = FormatterClangformat =
             command = atom.config.get 'formatter-clangformat.a.executablePath'
             args = atom.config.get 'formatter-clangformat.cpp.arguments'
             toReturn = []
+            toReturnErr = []
             process = child_process.spawn(command, args, {})
+            process.stderr.on 'data', (data) -> toReturnErr.push data
             process.stdout.on 'data', (data) -> toReturn.push data
             process.stdin.write text
             process.stdin.end()
             process.on 'close', ->
-            if toReturn.length isnt 0
-              resolve(toReturn.join('\n'))
-            else
-              atom.notifications.addWarning("An error is occured");
+              if toReturn.length isnt 0
+                resolve(toReturn.join('\n'))
+              else
+                atom.notifications.addError('formatter-clangformat : error', {dismissable: true, detail: toReturnErr.join('\n')});
       } if atom.config.get 'formatter-clangformat.cpp.enable'
       {
         selector: '.source.objc'
@@ -135,15 +154,17 @@ module.exports = FormatterClangformat =
             command = atom.config.get 'formatter-clangformat.a.executablePath'
             args = atom.config.get 'formatter-clangformat.objc.arguments'
             toReturn = []
+            toReturnErr = []
             process = child_process.spawn(command, args, {})
+            process.stderr.on 'data', (data) -> toReturnErr.push data
             process.stdout.on 'data', (data) -> toReturn.push data
             process.stdin.write text
             process.stdin.end()
             process.on 'close', ->
-            if toReturn.length isnt 0
-              resolve(toReturn.join('\n'))
-            else
-              atom.notifications.addWarning("An error is occured");
+              if toReturn.length isnt 0
+                resolve(toReturn.join('\n'))
+              else
+                atom.notifications.addWarning(toReturnErr.join('\n'));
       } if atom.config.get 'formatter-clangformat.objc.enable'
       {
         selector: '.source.java'
@@ -153,15 +174,17 @@ module.exports = FormatterClangformat =
             command = atom.config.get 'formatter-clangformat.a.executablePath'
             args = atom.config.get 'formatter-clangformat.java.arguments'
             toReturn = []
+            toReturnErr = []
             process = child_process.spawn(command, args, {})
+            process.stderr.on 'data', (data) -> toReturnErr.push data
             process.stdout.on 'data', (data) -> toReturn.push data
             process.stdin.write text
             process.stdin.end()
             process.on 'close', ->
-            if toReturn.length isnt 0
-              resolve(toReturn.join('\n'))
-            else
-              atom.notifications.addWarning("An error is occured");
+              if toReturn.length isnt 0
+                resolve(toReturn.join('\n'))
+              else
+                atom.notifications.addError('formatter-clangformat : error', {dismissable: true, detail: toReturnErr.join('\n')});
       } if atom.config.get 'formatter-clangformat.java.enable'
       {
         selector: '.source.js'
@@ -171,14 +194,36 @@ module.exports = FormatterClangformat =
             command = atom.config.get 'formatter-clangformat.a.executablePath'
             args = atom.config.get 'formatter-clangformat.js.arguments'
             toReturn = []
+            toReturnErr = []
             process = child_process.spawn(command, args, {})
+            process.stderr.on 'data', (data) -> toReturnErr.push data
             process.stdout.on 'data', (data) -> toReturn.push data
             process.stdin.write text
             process.stdin.end()
             process.on 'close', ->
-            if toReturn.length isnt 0
-              resolve(toReturn.join('\n'))
-            else
-              atom.notifications.addWarning("An error is occured");
+              if toReturn.length isnt 0
+                resolve(toReturn.join('\n'))
+              else
+                atom.notifications.addError('formatter-clangformat : error', {dismissable: true, detail: toReturnErr.join('\n')});
       } if atom.config.get 'formatter-clangformat.js.enable'
+      {
+        selector: 'source.protobuf'
+        getNewText: (text) ->
+          child_process = require 'child_process'
+          return new Promise (resolve, reject) ->
+            command = atom.config.get 'formatter-clangformat.a.executablePath'
+            args = atom.config.get 'formatter-clangformat.protobuf.arguments'
+            toReturn = []
+            toReturnErr = []
+            process = child_process.spawn(command, args, {})
+            process.stderr.on 'data', (data) -> toReturnErr.push data
+            process.stdout.on 'data', (data) -> toReturn.push data
+            process.stdin.write text
+            process.stdin.end()
+            process.on 'close', ->
+              if toReturn.length isnt 0
+                resolve(toReturn.join('\n'))
+              else
+                atom.notifications.addError('formatter-clangformat : error', {dismissable: true, detail: toReturnErr.join('\n')});
+      } if atom.config.get 'formatter-clangformat.protobuf.enable'
     ]
