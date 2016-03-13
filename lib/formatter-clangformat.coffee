@@ -27,7 +27,7 @@ module.exports = FormatterClangformat =
           title: 'Arguments passed to the formatter C language'
           type: 'array'
           default: []
-          description: 'Example : `-assume-filename="/usr/local/mycfg/c/.clang-format"`'
+          description: 'Example : `-assume-filename=/usr/local/mycfg/c/.clang-format`'
     cpp:
       title: 'C++ language'
       type: 'object'
@@ -42,7 +42,7 @@ module.exports = FormatterClangformat =
           title: 'Arguments passed to the formatter C++ language'
           type: 'array'
           default: []
-          description: 'Example : `-assume-filename="/usr/local/mycfg/cpp/.clang-format"`'
+          description: 'Example : `-assume-filename=/usr/local/mycfg/cpp/.clang-format`'
     objc:
       title: 'Objective-c language'
       type: 'object'
@@ -57,7 +57,7 @@ module.exports = FormatterClangformat =
           title: 'Arguments passed to the formatter Objective-c language'
           type: 'array'
           default: []
-          description: 'Example : `-assume-filename="/usr/local/mycfg/objc/.clang-format"`'
+          description: 'Example : `-assume-filename=/usr/local/mycfg/objc/.clang-format`'
     java:
       title: 'Java language'
       type: 'object'
@@ -72,7 +72,7 @@ module.exports = FormatterClangformat =
           title: 'Arguments passed to the formatter Java language'
           type: 'array'
           default: []
-          description: 'Example : `-assume-filename="/usr/local/mycfg/java/.clang-format"`'
+          description: 'Example : `-assume-filename=/usr/local/mycfg/java/.clang-format`'
     js:
       title: 'Js language'
       type: 'object'
@@ -87,7 +87,7 @@ module.exports = FormatterClangformat =
           title: 'Arguments passed to the formatter Js language'
           type: 'array'
           default: []
-          description: 'Example : `-assume-filename="/usr/local/mycfg/js/.clang-format"`'
+          description: 'Example : `-assume-filename=/usr/local/mycfg/js/.clang-format`'
     protobuf:
       title: 'Protobuf language'
       type: 'object'
@@ -102,7 +102,7 @@ module.exports = FormatterClangformat =
           title: 'Arguments passed to the formatter Protobuf language'
           type: 'array'
           default: []
-          description: 'Example : `-assume-filename="/usr/local/mycfg/protobuf/.clang-format"`'
+          description: 'Example : `-assume-filename=/usr/local/mycfg/protobuf/.clang-format`'
 
   provideFormatter: ->
     [
