@@ -1,7 +1,7 @@
 {
   "name": "formatter-clangformat",
   "main": "./lib/formatter-clangformat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Formatter for C, C++, Objective-C, Java, Javascript, and Protobuf.",
   "keywords": [
     "formatter",
