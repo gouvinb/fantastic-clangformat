@@ -2,8 +2,18 @@
   "name": "formatter-clangformat",
   "main": "./lib/formatter-clangformat",
   "version": "1.0.0",
-  "description": "A short description of your package",
-  "keywords": [],
+  "description": "Formatter for C, C++, Objective-C, Java, Javascript, and Protobuf.",
+  "keywords": [
+    "formatter",
+    "c",
+    "c++",
+    "objective-c",
+    "java",
+    "javascript",
+    "protobuf",
+    "clang-format",
+    "format"
+  ],
   "repository": "https://github.com/gouvinb/formatter-clangformat",
   "license": "MIT",
   "engines": {
