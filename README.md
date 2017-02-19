@@ -30,6 +30,16 @@ Default (inspired from IntelliJ):
   'alt-cmd-l': 'formatter:format-code'
 ```
 
+### Format on save
+
+Add these lines to your init.coffee script (Edit > Init Script...) :
+
+```coffee
+atom.workspace.observeTextEditors (editor) ->
+  editor.buffer.onWillSave ->
+    atom.commands.dispatch(atom.views.getView(editor), 'formatter:format-code')
+```
+
 ### List of config
 
 -   Path to the exectuable
@@ -75,6 +85,14 @@ Default (inspired from IntelliJ):
     -   Arguments passed to the formatter Javascript language
 
         -   Example : `-assume-filename=/usr/local/mycfg/js/.clang-format`
+
+-   TypeScript language'
+
+    -   Enable formatter for TypeScript language (*need restart Atom*)
+
+    -   Arguments passed to the formatter TypeScript language
+
+        -   Example : `-assume-filename=/usr/local/mycfg/ts/.clang-format`
 
 -   Protobuf language'
 
