@@ -10,7 +10,7 @@
     "objective-c",
     "java",
     "javascript",
-	"typescript"
+    "typescript",
     "protobuf",
     "clang-format",
     "format"
