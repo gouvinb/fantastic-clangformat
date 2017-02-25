@@ -1,8 +1,8 @@
 {
   "name": "formatter-clangformat",
   "main": "./lib/formatter-clangformat",
-  "version": "1.0.1",
-  "description": "Formatter for C, C++, Objective-C, Java, Javascript, and Protobuf.",
+  "version": "1.0.2",
+  "description": "Formatter for C, C++, Objective-C, Java, Javascript, TypeScript and Protobuf.",
   "keywords": [
     "formatter",
     "c",
@@ -10,6 +10,7 @@
     "objective-c",
     "java",
     "javascript",
+	"typescript"
     "protobuf",
     "clang-format",
     "format"

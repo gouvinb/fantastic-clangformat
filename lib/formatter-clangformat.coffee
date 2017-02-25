@@ -88,6 +88,21 @@ module.exports = FormatterClangformat =
           type: 'array'
           default: []
           description: 'Example : `-assume-filename=/usr/local/mycfg/js/.clang-format`'
+    ts:
+      title: 'TypeScript language'
+      type: 'object'
+      description: 'All parameters for TypeScript language.'
+      properties:
+        enable:
+          title: 'Enable formatter for TypeScript language'
+          type: 'boolean'
+          default: true
+          description: 'Need restart Atom.'
+        arguments:
+          title: 'Arguments passed to the formatter TypeScript language'
+          type: 'array'
+          default: []
+          description: 'Example : `-assume-filename=/usr/local/mycfg/ts/.clang-format`'
     protobuf:
       title: 'Protobuf language'
       type: 'object'
@@ -206,6 +221,26 @@ module.exports = FormatterClangformat =
               else
                 atom.notifications.addError('formatter-clangformat : error', {dismissable: true, detail: toReturnErr.join('\n')});
       } if atom.config.get 'formatter-clangformat.js.enable'
+      {
+        selector: '.source.ts'
+        getNewText: (text) ->
+          child_process = require 'child_process'
+          return new Promise (resolve, reject) ->
+            command = atom.config.get 'formatter-clangformat.a.executablePath'
+            args = atom.config.get 'formatter-clangformat.ts.arguments'
+            toReturn = []
+            toReturnErr = []
+            process = child_process.spawn(command, args, {})
+            process.stderr.on 'data', (data) -> toReturnErr.push data
+            process.stdout.on 'data', (data) -> toReturn.push data
+            process.stdin.write text
+            process.stdin.end()
+            process.on 'close', ->
+              if toReturn.length isnt 0
+                resolve(toReturn.join('\n'))
+              else
+                atom.notifications.addError('formatter-clangformat : error', {dismissable: true, detail: toReturnErr.join('\n')});
+      } if atom.config.get 'formatter-clangformat.ts.enable'
       {
         selector: 'source.protobuf'
         getNewText: (text) ->

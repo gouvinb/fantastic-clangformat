@@ -6,6 +6,10 @@
 *   Cursor position
 *   More optimization ?
 
+## 1.0.2 - Adding TypeScript support
+
+*   Add support for TypeScript
+
 ## 1.0.0 - Complete description
 
 *   Add description to package.json
